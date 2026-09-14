@@ -42,6 +42,8 @@ HTTP requests                 Leave empty
 
 ## Request Methods
 
+Change the target language to select the request type:
+
 |Language|Request|Requires Body?|
 |---|---|---|
 |Amharic|GET|No|
