@@ -49,5 +49,5 @@ Change the target language to select the request type:
 |Amharic|GET|No|
 |Arabic|POST|Yes|
 |Azerbaijani|PUT|Yes|
-|Basque|DELETE|Optionally|
+|Basque|DELETE|No|
 |Bulgarian|PATCH|Yes|
