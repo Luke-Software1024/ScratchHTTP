@@ -1,17 +1,45 @@
 # ScratchHTTP
-HTTP GET requests in vanilla Scratch 3.0
+HTTP ~~GET~~ requests in vanilla Scratch 3.0
+
 # How can I do this?
 -Simply add "127.0.0.1 translate-service.scratch.mit.edu" to your hosts file (on windows - untested on linux)
 <br>
 -Run the example server
 # How is this possible?
 ![Screenshot (19)](https://github.com/mutethecat/ScratchHTTP/assets/71191728/c9948c14-1ffe-44fc-92b9-1a9e0f00f447)
-# When the translate feature is used in scratch, It sends an HTTP GET request to "translate-service.scratch.mit.edu".
+When the translate feature is used in scratch, It sends an HTTP GET request to "translate-service.scratch.mit.edu".
 ![Screenshot (16)](https://github.com/mutethecat/ScratchHTTP/assets/71191728/23c41d18-7ac6-446a-9f49-108e15b9d77c)
-# Route the "translate-service.scratch.mit.edu" to localhost in the hosts file.
+Route the "translate-service.scratch.mit.edu" to localhost in the hosts file.
 ![Screenshot (15)](https://github.com/mutethecat/ScratchHTTP/assets/71191728/e2bbd37c-5c62-40a4-ade4-986c3efcccb5)
-# Create a custom script to take the parameters that Scratch sends and use the string parameter as the url to return the content of.
+Create a custom script to take the parameters that Scratch sends and use the string parameter as the url to return the content of.
 ![Screenshot (17)](https://github.com/mutethecat/ScratchHTTP/assets/71191728/d90d53eb-29be-4f64-a751-78911fe6a61d)
 
-# [Youtube](https://www.youtube.com/watch?v=K7zrb-nku0g)
+# Improvements
+Now supporting all of the following request types:
+- GET
+- POST
+- PUT
+- DELETE
+- PATCH
 
+## Text Format
+
+```
+scratch-http|https://example.com|body
+     ^^               ^^          ^^
+   Header             URL        Body
+All Scratch-                If applicable;
+HTTP requests                 Leave empty
+ must start                   if not used
+  with this                  (Keep the |)
+```
+
+## Request Methods
+
+|Language|Request|Requires Body?|
+|---|---|---|
+|Amharic|GET|No|
+|Arabic|POST|Yes|
+|Azerbaijani|PUT|Yes|
+|Basque|DELETE|Optionally|
+|Bulgarian|PATCH|Yes|
