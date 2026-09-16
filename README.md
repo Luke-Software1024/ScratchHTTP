@@ -21,7 +21,7 @@ Create a custom script to take the parameters that Scratch sends and use the str
 ![Screenshot (17)](https://github.com/mutethecat/ScratchHTTP/assets/71191728/d90d53eb-29be-4f64-a751-78911fe6a61d)
 
 # Improvements
-Now supporting all of the following request types:
+Now supporting all of the following request methods:
 - GET
 - POST
 - PUT
@@ -42,7 +42,7 @@ HTTP requests                 Leave empty
 
 ## Request Methods
 
-Change the target language to select the request type:
+Change the target language to select the request method:
 
 |Language|Request|Requires Body?|
 |---|---|---|
