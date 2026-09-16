@@ -12,11 +12,13 @@ def helloworld():
         full_txt = request.args["text"].split("|")
         txt = full_txt[1]
         body = full_txt[2]
+
         method = methods[request.args["language"]]
         if method in body_methods: 
             data = {"result": str(method(txt, body).text)}
         else: 
             data = {"result": str(method(txt).text)}
+        
         print(data)
         res = jsonify(data)
         res.headers.add('Access-Control-Allow-Origin', '*')
