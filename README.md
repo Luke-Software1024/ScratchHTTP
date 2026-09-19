@@ -44,7 +44,7 @@ https://example.com|body
 
 Change the target language to select the request method:
 
-|Language|Request|Requires Body?|
+|Language|Request|Uses Body?|
 |---|---|---|
 |Amharic|GET|No|
 |Arabic|POST|Yes|
