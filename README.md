@@ -4,7 +4,7 @@ HTTP ~~GET~~ requests in vanilla Scratch 3.0
 # How can I do this?
 - Create a certificate. Name it `server.crt` with the key file named `server.key`.
 - Install the following dependencies: `flask` `requests`
-- Simply add "127.0.0.1 translate-service.scratch.mit.edu" to your hosts file (on windows - untested on linux)
+- Simply add "127.0.0.1 translate-service.scratch.mit.edu" to your hosts file (on windows - ~~untested on linux~~ Linux works too - untested on macOS)
 - Run the example server
 
 # How is this possible?
