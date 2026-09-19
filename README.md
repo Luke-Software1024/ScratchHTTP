@@ -31,13 +31,13 @@ Now supporting all of the following request methods:
 ## Text Format
 
 ```
-scratch-http|https://example.com|body
-     ^^               ^^          ^^
-   Header             URL        Body
-All Scratch-                If applicable;
-HTTP requests                 Leave empty
- must start                   if not used
-  with this                  (Keep the |)
+https://example.com|body
+         ^^          ^^
+         URL        Body
+               If applicable;
+                 Leave empty
+                 if not used
+                (Keep the |)
 ```
 
 ## Request Methods
