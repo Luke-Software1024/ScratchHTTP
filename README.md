@@ -4,8 +4,9 @@ HTTP ~~GET~~ requests in vanilla Scratch 3.0
 # How can I do this?
 - Create a certificate. Name it `server.crt` with the key file named `server.key`.
 - Install the following dependencies: `flask` `requests`
-- Simply add "127.0.0.1 translate-service.scratch.mit.edu" to your hosts file (on windows - untested on linux)
+- Simply add "127.0.0.1 translate-service.scratch.mit.edu" to your hosts file (on windows - ~~untested on linux~~ Linux works too - untested on macOS)
 - Run the example server
+- Add a security exception for "translate-service.scratch.mit.edu" in your browser; the certificate is self-signed, and therefore, insecure
 
 # How is this possible?
 
@@ -51,3 +52,6 @@ Change the target language to select the request method:
 |Azerbaijani|PUT|Yes|
 |Basque|DELETE|No|
 |Bulgarian|PATCH|Yes|
+|Zulu|[Dummy Request]|No|
+
+- The Dummy Request can be used as a "padding" between requests, in case Scratch's caching system is causing unexpected behavior.

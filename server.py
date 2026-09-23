@@ -3,7 +3,7 @@ import requests
   
 app = Flask(__name__) 
 
-methods = {"am": requests.get, "ar": requests.post, "az": requests.put, "eu": requests.delete, "bg": requests.patch}
+methods = {"am": requests.get, "ar": requests.post, "az": requests.put, "eu": requests.delete, "bg": requests.patch, "zu": lambda url: requests.Response()}
 body_methods = (requests.post, requests.put, requests.patch)
 
 @app.route('/translate', methods=['GET']) 
