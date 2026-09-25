@@ -14,9 +14,11 @@ def server():
 
     method = methods[request.args["language"]]
     if method in body_methods: 
-        data = {"result": str(method(txt, body).text)}
+        result = method(txt, body)
+        data = {"result": "|".join((str(result.status_code), result.text))}
     else: 
-        data = {"result": str(method(txt).text)}
+        result = method(txt)
+        data = {"result": "|".join((str(result.status_code), result.text))}
     
     print(data)
     res = jsonify(data)

@@ -31,6 +31,7 @@ Now supporting all of the following request methods:
 
 ## Text Format
 
+### Input Format
 ```
 https://example.com|body
          ^^          ^^
@@ -39,6 +40,13 @@ https://example.com|body
                  Leave empty
                  if not used
                 (Keep the |)
+```
+
+### Output Format
+```
+200|body
+ ^   ^^<<<< Body
+Status code
 ```
 
 ## Request Methods
