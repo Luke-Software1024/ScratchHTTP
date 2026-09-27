@@ -1,2 +1,4 @@
-server.crt
-server.key
+text-server.crt
+text-server.key
+sound-server.crt
+sound-server.key
