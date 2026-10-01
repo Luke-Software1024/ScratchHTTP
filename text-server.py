@@ -41,7 +41,7 @@ def server():
         if request.args["language"] == "zu":
             result.headers["content-type"] = "application/octet-stream"
 
-        filetype = types.get(result.headers["content-type"], "d")
+        filetype = types.get(result.headers["content-type"].split(";")[0], "d")
 
         data = {"result": "|".join((str(result.status_code), filetype, result.text))}
     else: 
@@ -50,7 +50,7 @@ def server():
         if request.args["language"] == "zu":
             result.headers["content-type"] = "application/octet-stream"
 
-        filetype = types.get(result.headers["content-type"], "d")
+        filetype = types.get(result.headers["content-type"].split(";")[0], "d")
         match filetype:
             case "h" | "c" | "t":
                 text = result.text
