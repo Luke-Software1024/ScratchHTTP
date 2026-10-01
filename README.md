@@ -3,7 +3,7 @@ HTTP ~~GET~~ requests in vanilla Scratch 3.0
 
 # How can I do this?
 - Create a certificate. Name it `text-server.crt` with the key file named `text-server.key`.
-- Install the following dependencies: `flask` `requests`
+- Install the following dependencies: `flask` `requests` `pillow`
 - Simply add `127.0.0.1 translate-service.scratch.mit.edu` to your hosts file (on windows - ~~untested on linux~~ Linux works too - untested on macOS)
 - Run `text-server.py`
 - Add a security exception for `translate-service.scratch.mit.edu` in your browser; the certificate is self-signed, and therefore, insecure
@@ -78,3 +78,8 @@ ScratchHTTP now supports playing back audio!
 - Only GET is supported
 - You just need to type in the URL; nothing else is needed
 - The audio file at the URL will be played back
+
+## Images
+
+ScratchHTTP can convert image files to a Scratch-friendly format.
+See `image-client.sb3` for an example.
