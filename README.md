@@ -44,9 +44,13 @@ https://example.com|body
 
 ### Output Format
 ```
-200|body
- ^   ^^<<<< Body
-Status code
+200|filetype|body <- Body
+ ^     ^^<< Filetype
+Status code h = Html
+            c = Css
+            t = plainText
+            i = Image (base64 encoded)
+            d = Data (lowercase hex encoded)
 ```
 
 ## Request Methods
@@ -81,5 +85,5 @@ ScratchHTTP now supports playing back audio!
 
 ## Images
 
-ScratchHTTP can convert image files to a Scratch-friendly format.
+ScratchHTTP can convert image files to a Scratch-friendly base64 format.
 See `image-client.sb3` for an example.

@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 methods = {"am": requests.get, "ar": requests.post, "az": requests.put, "eu": requests.delete, "bg": requests.patch, "zu": lambda url: requests.Response()}
 body_methods = (requests.post, requests.put, requests.patch)
+types = {"text/html": "h", "text/css": "c", "text/plain": "t", "image/avif": "i", "image/bmp": "i", "image/gif": "i", "image/jpeg": "i", "image/png": "i", "image/tiff": "i", "image/webp": "i"}
 
 color_to_b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 def process_image(_image: bytes):
@@ -37,18 +38,27 @@ def server():
     method = methods[request.args["language"]]
     if method in body_methods: 
         result = method(txt, body)
-        data = {"result": "|".join((str(result.status_code), result.text))}
+        if request.args["language"] == "zu":
+            result.headers["content-type"] = "application/octet-stream"
+
+        filetype = types.get(result.headers["content-type"], "d")
+
+        data = {"result": "|".join((str(result.status_code), filetype, result.text))}
     else: 
         result = method(txt)
 
         if request.args["language"] == "zu":
             result.headers["content-type"] = "application/octet-stream"
 
-        if result.headers["content-type"].startswith("image/"):
-            text = process_image(result.content)
-        else:
-            text = result.text
-        data = {"result": "|".join((str(result.status_code), text))}
+        filetype = types.get(result.headers["content-type"], "d")
+        match filetype:
+            case "h" | "c" | "t":
+                text = result.text
+            case "i":
+                text = process_image(result.content)
+            case "d":
+                text = result.content.hex()
+        data = {"result": "|".join((str(result.status_code), filetype, text))}
     
     print(data)
     res = jsonify(data)
