@@ -2,10 +2,10 @@
 HTTP ~~GET~~ requests in vanilla Scratch 3.0
 
 # How can I do this?
-- Create a certificate. Name it `text-server.crt` with the key file named `text-server.key`.
+- Create a certificate. Name it `server.crt` with the key file named `server.key`.
 - Install the following dependencies: `flask` `requests` `pillow`
 - Simply add `127.0.0.1 translate-service.scratch.mit.edu` to your hosts file (on windows - ~~untested on linux~~ Linux works too - untested on macOS)
-- Run `text-server.py`
+- Run `server.py`
 - Add a security exception for `translate-service.scratch.mit.edu` in your browser; the certificate is self-signed, and therefore, insecure
 
 # How is this possible?
@@ -70,18 +70,7 @@ Change the target language to select the request method:
 
 ## Audio
 
-ScratchHTTP now supports playing back audio!
-
-### Setup differences
-- The certificate/key should be named `sound-server.`(`crt`/`key`)
-- Add `127.0.0.1 synthesis-service.scratch.mit.edu` to the hosts file
-- Likewise, add the security exception for `synthesis-service.scratch.mit.edu`
-- Run `sound-server.py` instead of `text-server`
-
-### Usage differences
-- Only GET is supported
-- You just need to type in the URL; nothing else is needed
-- The audio file at the URL will be played back
+Audio is not natively supported anymore. Please use something like [this](https://scratch.mit.edu/projects/1184501461/) to play audio.
 
 ## Images
 
