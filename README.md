@@ -10,16 +10,16 @@ HTTP ~~GET~~ requests in vanilla Scratch 3.0
 
 # How is this possible?
 
-![Screenshot (19)](https://github.com/mutethecat/ScratchHTTP/assets/71191728/c9948c14-1ffe-44fc-92b9-1a9e0f00f447)
+<img width="1920" height="1032" alt="translate" src="https://github.com/user-attachments/assets/781a1d32-397f-4132-9781-8868d796ce4c" />
+
 When the translate feature is used in scratch, It sends an HTTP GET request to "translate-service.scratch.mit.edu".
+<img width="1920" height="299" alt="inspect" src="https://github.com/user-attachments/assets/bb1b271d-b414-4247-9393-7b63ea776f58" />
 
-![Screenshot (16)](https://github.com/mutethecat/ScratchHTTP/assets/71191728/23c41d18-7ac6-446a-9f49-108e15b9d77c)
 Route the "translate-service.scratch.mit.edu" to localhost in the hosts file.
+<img width="666" height="746" alt="hosts-file" src="https://github.com/user-attachments/assets/a7a80540-5406-424f-9731-ffaccf2633d9" />
 
-![Screenshot (15)](https://github.com/mutethecat/ScratchHTTP/assets/71191728/e2bbd37c-5c62-40a4-ade4-986c3efcccb5)
 Create a custom script to take the parameters that Scratch sends and use the string parameter as the url to return the content of.
-
-![Screenshot (17)](https://github.com/mutethecat/ScratchHTTP/assets/71191728/d90d53eb-29be-4f64-a751-78911fe6a61d)
+<img width="1560" height="943" alt="script" src="https://github.com/user-attachments/assets/1d3f40d1-49b0-486e-9348-dfac99d154ea" />
 
 # Improvements
 Now supporting all of the following request methods:
