@@ -14,7 +14,8 @@ def process_image(_image: bytes):
     image = Image.open(BytesIO(_image))
     image = image.convert("RGB")
 
-    image = ImageOps.contain(image, (256, 256))
+    if image.width > 256 or image.height > 256:
+        image = ImageOps.contain(image, (256, 256))
 
     palette = Image.open("palette.png")
     image = image.quantize(palette=palette)
@@ -39,7 +40,7 @@ def server():
     if method in body_methods: 
         result = method(txt, body)
         if request.args["language"] == "zu":
-            result.headers["content-type"] = "application/octet-stream"
+            result.headers["content-type"] = "text/plain"
 
         filetype = types.get(result.headers["content-type"].split(";")[0], "d")
 
@@ -48,7 +49,7 @@ def server():
         result = method(txt)
 
         if request.args["language"] == "zu":
-            result.headers["content-type"] = "application/octet-stream"
+            result.headers["content-type"] = "text/plain"
 
         filetype = types.get(result.headers["content-type"].split(";")[0], "d")
         match filetype:
