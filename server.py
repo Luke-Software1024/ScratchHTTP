@@ -2,12 +2,13 @@ from flask import Flask, jsonify, request
 import requests
 from io import BytesIO
 from PIL import Image, ImageOps
+from websockets.sync.client import connect
 
 app = Flask(__name__) 
 
 methods = {"am": requests.get, "ar": requests.post, "az": requests.put, "eu": requests.delete, "bg": requests.patch, "zu": lambda url: requests.Response()}
 body_methods = (requests.post, requests.put, requests.patch)
-types = {"text/html": "h", "text/css": "c", "text/plain": "t", "image/avif": "i", "image/bmp": "i", "image/gif": "i", "image/jpeg": "i", "image/png": "i", "image/tiff": "i", "image/webp": "i"}
+types = {"text/html": "h", "text/css": "c", "text/plain": "t", "image/avif": "i", "image/bmp": "i", "image/gif": "i", "image/jpeg": "i", "image/png": "i", "image/tiff": "i"}
 
 color_to_b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 def process_image(_image: bytes):
@@ -36,35 +37,43 @@ def server():
     txt = full_txt[0]
     body = full_txt[1]
 
-    method = methods[request.args["language"]]
-    if method in body_methods: 
-        result = method(txt, body)
-        if request.args["language"] == "zu":
-            result.headers["content-type"] = "text/plain"
+    match txt.split(":")[0]: # Scheme of URI
+        case "http" | "https":
+            method = methods[request.args["language"]]
+            if method in body_methods: 
+                result = method(txt, body)
+                if request.args["language"] == "zu":
+                    result.headers["content-type"] = "text/plain"
 
-        filetype = types.get(result.headers["content-type"].split(";")[0], "d")
+                filetype = types.get(result.headers["content-type"].split(";")[0], "d")
 
-        data = {"result": "|".join((str(result.status_code), filetype, result.text))}
-    else: 
-        result = method(txt)
+                data = {"result": "|".join((str(result.status_code), filetype, result.text))}
+            else: 
+                result = method(txt)
 
-        if request.args["language"] == "zu":
-            result.headers["content-type"] = "text/plain"
+                if request.args["language"] == "zu":
+                    result.headers["content-type"] = "text/plain"
 
-        filetype = types.get(result.headers["content-type"].split(";")[0], "d")
-        match filetype:
-            case "h" | "c" | "t":
-                text = result.text
-            case "i":
-                text = process_image(result.content)
-            case "d":
-                text = result.content.hex()
-        data = {"result": "|".join((str(result.status_code), filetype, text))}
-    
+                filetype = types.get(result.headers["content-type"].split(";")[0], "d")
+                match filetype:
+                    case "h" | "c" | "t":
+                        text = result.text
+                    case "i":
+                        text = process_image(result.content)
+                    case "d":
+                        text = result.content.hex()
+                data = {"result": "|".join((str(result.status_code), filetype, text))}
+        case "ws" | "wss":
+            with connect(txt) as socket:
+                socket.send(body)
+                data = {"result": f"200|t|{socket.recv()}"}
+        case _:
+            data = {"result": "426|t|That protocol is not supported. Supported protocols: HTTP, WebSocket"}
+
     print(data)
     res = jsonify(data)
     res.headers.add('Access-Control-Allow-Origin', '*')
     return res
-  
+    
 if __name__ == '__main__': 
     app.run(host='127.0.0.1', port=443, ssl_context=("server.crt", "server.key"))

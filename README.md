@@ -1,9 +1,9 @@
 # ScratchHTTP
-HTTP ~~GET~~ requests in vanilla Scratch 3.0
+~~HTTP~~ ~~GET~~ requests in vanilla Scratch 3.0
 
 # How can I do this?
 - Create a certificate. Name it `server.crt` with the key file named `server.key`.
-- Install the following dependencies: `flask` `requests` `pillow`
+- Install the `requirements.txt` dependencies
 - Simply add `127.0.0.1 translate-service.scratch.mit.edu` to your hosts file (on windows - ~~untested on linux~~ Linux works too - untested on macOS)
 - Run `server.py`
 - Add a security exception for `translate-service.scratch.mit.edu` in your browser; the certificate is self-signed, and therefore, insecure
@@ -76,3 +76,12 @@ Audio is not natively supported anymore. Please use something like [this](https:
 
 ScratchHTTP can convert image files to a Scratch-friendly base64 format.
 See `image-client.sb3` for an example.
+
+## WebSockets
+
+ScratchHTTP now supports WebSockets!
+
+- URL must start with `ws` or `wss`
+- Language is irrelevant
+- The body will be sent to the WS server, the response will be sent back
+- Status code is hardcoded to `200`, filetype to `t`
