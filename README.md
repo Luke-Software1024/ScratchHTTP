@@ -1,4 +1,4 @@
-# ScratchHTTP
+# ScratchWeb
 ~~HTTP~~ ~~GET~~ requests in vanilla Scratch 3.0
 
 # How can I do this?
@@ -22,12 +22,6 @@ Create a custom script to take the parameters that Scratch sends and use the str
 <img width="1560" height="943" alt="script" src="https://github.com/user-attachments/assets/1d3f40d1-49b0-486e-9348-dfac99d154ea" />
 
 # Improvements
-Now supporting all of the following request methods:
-- GET
-- POST
-- PUT
-- DELETE
-- PATCH
 
 ## Text Format
 
@@ -74,12 +68,12 @@ Audio is not natively supported anymore. Please use something like [this](https:
 
 ## Images
 
-ScratchHTTP can convert image files to a Scratch-friendly base64 format.
+ScratchWeb can convert image files to a Scratch-friendly base64 format.
 See `image-client.sb3` for an example.
 
 ## WebSockets
 
-ScratchHTTP now supports WebSockets!
+ScratchWeb now supports WebSockets!
 
 - URL must start with `ws` or `wss`
 - Language is irrelevant
