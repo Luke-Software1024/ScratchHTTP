@@ -45,6 +45,7 @@ Status code h = Html
             t = plainText
             i = Image (base64 encoded)
             d = Data (lowercase hex encoded)
+            n = http (Network) header
 ```
 
 ## Request Methods
@@ -58,8 +59,10 @@ Change the target language to select the request method:
 |Azerbaijani|PUT|Yes|
 |Basque|DELETE|No|
 |Bulgarian|PATCH|Yes|
+|Catalan|OPTIONS|No|
 |Zulu|[Dummy Request]|No|
 
+- The response body of an OPTIONS request is replaced with the `Allow` header of the request.
 - The Dummy Request can be used as a "padding" between requests, in case Scratch's caching system is causing unexpected behavior.
 
 ## Audio

@@ -6,7 +6,7 @@ from websockets.sync.client import connect
 
 app = Flask(__name__) 
 
-methods = {"am": requests.get, "ar": requests.post, "az": requests.put, "eu": requests.delete, "bg": requests.patch, "zu": lambda url: requests.Response()}
+methods = {"am": requests.get, "ar": requests.post, "az": requests.put, "eu": requests.delete, "bg": requests.patch, "ca": requests.options, "zu": lambda url: requests.Response()}
 body_methods = (requests.post, requests.put, requests.patch)
 types = {"text/html": "h", "text/css": "c", "text/plain": "t", "image/avif": "i", "image/bmp": "i", "image/gif": "i", "image/jpeg": "i", "image/png": "i", "image/tiff": "i"}
 
@@ -42,8 +42,6 @@ def server():
             method = methods[request.args["language"]]
             if method in body_methods: 
                 result = method(txt, body)
-                if request.args["language"] == "zu":
-                    result.headers["content-type"] = "text/plain"
 
                 filetype = types.get(result.headers["content-type"].split(";")[0], "d")
 
@@ -51,10 +49,11 @@ def server():
             else: 
                 result = method(txt)
 
-                if request.args["language"] == "zu":
-                    result.headers["content-type"] = "text/plain"
-
-                filetype = types.get(result.headers["content-type"].split(";")[0], "d")
+                if request.args["language"] == "ca":
+                    filetype = "n"
+                    header = "allow"
+                else:
+                    filetype = types.get(result.headers["content-type"].split(";")[0], "d")
                 match filetype:
                     case "h" | "c" | "t":
                         text = result.text
@@ -62,6 +61,8 @@ def server():
                         text = process_image(result.content)
                     case "d":
                         text = result.content.hex()
+                    case "n":
+                        text = result.headers[header]
                 data = {"result": "|".join((str(result.status_code), filetype, text))}
         case "ws" | "wss":
             with connect(txt) as socket:
