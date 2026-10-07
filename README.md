@@ -46,6 +46,7 @@ Status code h = Html
             i = Image (base64 encoded)
             d = Data (lowercase hex encoded)
             n = http (Network) header
+            j = Json
 ```
 
 ## Request Methods

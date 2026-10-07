@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 methods = {"am": requests.get, "ar": requests.post, "az": requests.put, "eu": requests.delete, "bg": requests.patch, "ca": requests.options}
 body_methods = (requests.post, requests.put, requests.patch)
-types = {"text/html": "h", "text/css": "c", "text/plain": "t", "image/avif": "i", "image/bmp": "i", "image/gif": "i", "image/jpeg": "i", "image/png": "i", "image/tiff": "i"}
+types = {"text/html": "h", "text/css": "c", "text/plain": "t", "image/avif": "i", "image/bmp": "i", "image/gif": "i", "image/jpeg": "i", "image/png": "i", "image/tiff": "i", "application/json": "j"}
 
 color_to_b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 def process_image(_image: bytes):
@@ -55,7 +55,7 @@ def server():
                 else:
                     filetype = types.get(result.headers["content-type"].split(";")[0], "d")
                 match filetype:
-                    case "h" | "c" | "t":
+                    case "h" | "c" | "t" | "j":
                         text = result.text
                     case "i":
                         text = process_image(result.content)
