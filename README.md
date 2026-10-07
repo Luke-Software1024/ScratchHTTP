@@ -77,5 +77,5 @@ ScratchWeb now supports WebSockets!
 
 - URL must start with `ws` or `wss`
 - Language is irrelevant
-- The body will be sent to the WS server, the response will be sent back
+- The body will be sent to the WS server, the response will be received
 - Status code is hardcoded to `200`, filetype to `t`
