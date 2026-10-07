@@ -6,7 +6,7 @@ from websockets.sync.client import connect
 
 app = Flask(__name__) 
 
-methods = {"am": requests.get, "ar": requests.post, "az": requests.put, "eu": requests.delete, "bg": requests.patch, "ca": requests.options, "zu": lambda url: requests.Response()}
+methods = {"am": requests.get, "ar": requests.post, "az": requests.put, "eu": requests.delete, "bg": requests.patch, "ca": requests.options}
 body_methods = (requests.post, requests.put, requests.patch)
 types = {"text/html": "h", "text/css": "c", "text/plain": "t", "image/avif": "i", "image/bmp": "i", "image/gif": "i", "image/jpeg": "i", "image/png": "i", "image/tiff": "i"}
 
